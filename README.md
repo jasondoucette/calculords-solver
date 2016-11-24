@@ -15,12 +15,18 @@ the best one found.
 Rather than calculate all the possible play permutations, the script plays
 randomly a given number of times and then returns the best result found.
 
+Because there are multiple possible solutions for most scenarios, the
+exhaustive solver is often much faster than the sampling one when a solution
+exists. In an attempt to get the best of both worlds, we run each solver in
+its own thread and use whatever comes back first (e.g. exhaustive if it's faster
+than sampling, otherwise sampling.)
+
 ## Usage
 
 At the moment gameplay is managed via direct edits to the source code (so,
-yeah, TODO.)  Edit the `inputs` and `targets` variables at the top of the
-file and run the script. Then play the actions. Repeat until enemy base
-is captured :)
+yeah, TODO.)  Edit the `inputs` and `targets` variables at the top of
+`calculords.py` and run the script. Then play the actions. Repeat until enemy
+base is captured :)
 
 ## Unsolvable cases:
 
@@ -30,7 +36,8 @@ validation.)
 
 The difference between solvers is readily apparent here: while the sampling
 solver will return in relatively constant time (around 5s on a MacBook Air,)
-the exhaustive solver will take 9.5 minutes to come to the same conclusion.
+the exhaustive solver will take 9.5 minutes to come to the same conclusion
+(timings found while using the solver directly without multiprocessing.)
 
  - inputs = `[6,1,8,4,3,4,7,3]`, targets = `[20,100,62]`
  - inputs = `[8,1,5,4,8,4,7,7]`, targets = `[58,10,27]`
