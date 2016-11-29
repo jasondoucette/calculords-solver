@@ -9,7 +9,8 @@ inputs = '15968764'
 targets = [48,10,12]
 
 def worker(conn, solver, inputs, targets):
-    conn.send(str(solver.solve(inputs, targets)))
+    (winner, c) = solver.solve(inputs, targets)
+    conn.send("Solved in " + str(c) + "\n" + str(winner))
 
 samplingSolver = SamplingSolver()
 exhaustiveSolver = ExhaustiveSolver()

@@ -24,4 +24,4 @@ class Exhaustive(object):
                 c += 1
             if winner.solved() is True:
                 break
-        return winner
+        return (winner, c)

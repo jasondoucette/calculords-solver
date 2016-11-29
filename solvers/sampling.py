@@ -10,6 +10,7 @@ class Sampling(object):
     def solve(self, inputs, targets):
         digits = list(int(n) for n in inputs)
         winner = None
+        c = 0
         for n in range(self.cycles):
             shuffle(digits)
             ops = choice(list(product(*repeat('-+*', len(digits) - 1))))
@@ -20,4 +21,5 @@ class Sampling(object):
             result = attempt.run()
             if winner is None or result.score() > winner.score():
                 winner = result
-        return winner
+            c = c + 1
+        return (winner, c)
