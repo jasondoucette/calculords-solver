@@ -21,5 +21,7 @@ class Sampling(object):
             result = attempt.run()
             if winner is None or result.score() > winner.score():
                 winner = result
+            if winner.solved():
+                break
             c = c + 1
         return (winner, c)
