@@ -4,7 +4,7 @@ from attempt import Attempt
 from util import interleave
 
 class Exhaustive(object):
-    def solve(self, inputs, targets):
+    def solve(self, inputs, targets, maxCycles=10000):
         digits = list(int(n) for n in inputs)
         perms = set(permutations(digits, len(digits)))
         ops = set(product(*repeat('-+*', len(digits) - 1)))
@@ -22,6 +22,9 @@ class Exhaustive(object):
                 if winner.solved() is True:
                     break
                 c += 1
-            if winner.solved() is True:
+                if c >= maxCycles:
+                    winner = None
+                    break
+            if winner is None or winner.solved() is True:
                 break
         return (winner, c)

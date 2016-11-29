@@ -1,35 +1,14 @@
 #!/usr/bin/env python
 
-import time
-from multiprocessing import Process, Pipe
 from solvers.sampling import Sampling as SamplingSolver
 from solvers.exhaustive import Exhaustive as ExhaustiveSolver
 
-inputs = '15968764'
-targets = [48,10,12]
+inputs = '176485298'
+targets = [6,12,112]
 
-def worker(conn, solver, inputs, targets):
-    (winner, c) = solver.solve(inputs, targets)
-    conn.send("Solved in " + str(c) + "\n" + str(winner))
-
-samplingSolver = SamplingSolver()
 exhaustiveSolver = ExhaustiveSolver()
-
-processes = []
-parentConn, childConn = Pipe()
-for solver in [samplingSolver, exhaustiveSolver]:
-    p = Process(
-        target = worker,
-        args = (childConn, solver, inputs, targets))
-    p.start()
-    processes.append(p)
-
-# Block until we get a response from one of the solvers
-print parentConn.recv()
-
-# Now kill the rest of them
-for p in processes:
-    if p.is_alive():
-        p.terminate()
-    p.join()
-
+(result, c) = exhaustiveSolver.solve(inputs, targets)
+if result is None:
+    samplingSolver = SamplingSolver()
+    (result, c) = samplingSolver.solve(inputs, targets)
+print "Solved in " + str(c) + "\n" + str(result)
