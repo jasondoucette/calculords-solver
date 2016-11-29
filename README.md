@@ -17,15 +17,14 @@ randomly a given number of times and then returns the best result found.
 
 Because there are multiple possible solutions for most scenarios, the
 exhaustive solver is often much faster than the sampling one when a solution
-exists. In an attempt to get the best of both worlds, we run each solver in
-its own thread and use whatever comes back first (e.g. exhaustive if it's faster
-than sampling, otherwise sampling.)
+exists. In an attempt to get the best of both worlds, we only run a subset of
+the exhaustive solver options before resorting to sampling.
 
 ## Usage
 
-At the moment gameplay is managed via direct edits to the source code (so,
-yeah, TODO.)  Edit the `inputs` and `targets` variables at the top of
-`calculords.py` and run the script. Then play the actions. Repeat until enemy
+Run `calculords.py inputs target [target...]` were `inputs` is a concatenated
+string of all input numbers (e.g. 56429838) and the target card values are
+simply separated by spaces. Then play the actions. Repeat until enemy
 base is captured :)
 
 ## Unsolvable cases:

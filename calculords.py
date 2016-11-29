@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 
+import sys
+import argparse
+
 from solvers.sampling import Sampling as SamplingSolver
 from solvers.exhaustive import Exhaustive as ExhaustiveSolver
 
-inputs = '176485298'
-targets = [6,12,112]
+parser = argparse.ArgumentParser(description='Solve Calculords rounds.')
+parser.add_argument('inputs', type=int, help='input digits (concatenated as a string e.g. 12345678)')
+parser.add_argument('target', type=int, nargs='+', help='target values to hit (space separated)')
+args = parser.parse_args()
+
+inputs = str(args.inputs)
+targets = args.target
 
 exhaustiveSolver = ExhaustiveSolver()
 (result, c) = exhaustiveSolver.solve(inputs, targets)
