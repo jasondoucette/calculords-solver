@@ -23,8 +23,7 @@ class Exhaustive(object):
                     break
                 c += 1
                 if c >= maxCycles:
-                    winner = None
                     break
-            if winner is None or winner.solved() is True:
+            if c >= maxCycles or winner is None or winner.solved() is True:
                 break
         return (winner, c)

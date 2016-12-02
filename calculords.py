@@ -16,7 +16,7 @@ targets = args.target
 
 exhaustiveSolver = ExhaustiveSolver()
 (result, c) = exhaustiveSolver.solve(inputs, targets)
-if result is None:
+if result is None or not result.solved():
     samplingSolver = SamplingSolver()
     (result, c) = samplingSolver.solve(inputs, targets)
 print "Solved in " + str(c) + "\n" + str(result)
