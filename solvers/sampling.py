@@ -11,9 +11,10 @@ class Sampling(object):
         digits = list(int(n) for n in inputs)
         winner = None
         c = 0
+        possibleOps = list(product(*repeat('-+*', len(digits) - 1)))
         for n in range(self.cycles):
             shuffle(digits)
-            ops = choice(list(product(*repeat('-+*', len(digits) - 1))))
+            ops = choice(possibleOps)
 
             attempt = Attempt('Sampling',
                               interleave(list(digits), list(ops)),
