@@ -1,4 +1,5 @@
 from itertools import ifilter
+import string
 from result import Result
 
 class Attempt(object):
@@ -6,6 +7,8 @@ class Attempt(object):
         self.source = source
         self.combination = combination
         self.targets = list(targets)
+        self.all = string.maketrans('', '')
+        self.nodigits = self.all.translate(self.all, string.digits)
 
     def run(self):
         def walk(combination, ptr, actionsSoFar, remainingTargets):
@@ -35,7 +38,7 @@ class Attempt(object):
                     else:
                         total = total * nextDigit
                 ptr += 2
-            leftovers = ifilter(lambda x: x not in ['+', '-', '*'], combination[start:])
+            leftovers = str(combination[start:]).translate(self.all, self.nodigits)
             result = Result(self.source, actions, list(leftovers), targets)
             if alternate is not None and alternate.score() > result.score():
                 return alternate
