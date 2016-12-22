@@ -15,10 +15,10 @@ the best one found.
 Rather than calculate all the possible play permutations, the script plays
 randomly a given number of times and then returns the best result found.
 
-Because there are multiple possible solutions for most scenarios, the
-exhaustive solver is often much faster than the sampling one when a solution
-exists. In an attempt to get the best of both worlds, we only run a subset of
-the exhaustive solver options before resorting to sampling.
+Only the sampling solver is currently invoked by the supplied runner, as
+experimentation has found it to be "good enough" and there's not much difference
+between running the sampler and running a fraction of the exhaustive solver's
+possibilities.
 
 ## Usage
 
